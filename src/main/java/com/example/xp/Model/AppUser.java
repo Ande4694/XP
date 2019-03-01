@@ -11,6 +11,11 @@ public class AppUser {
 
     }
 
+    public AppUser(String userName, String encrytedPassword) {
+        this.userName = userName;
+        this.encrytedPassword = encrytedPassword;
+    }
+
     public AppUser(Long userId, String userName, String encrytedPassword) {
         this.userId = userId;
         this.userName = userName;
