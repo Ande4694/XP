@@ -21,4 +21,14 @@ public class IndexController {
 
     }
 
+    @GetMapping("/movie")
+    public String movie() {
+
+        log.info("movie called");
+
+
+        return "movie";
+
+    }
+
 }
