@@ -46,19 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // The pages does not require login
         http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
 
-        // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
-        // If no login, it will redirect to /login page.
-        http.authorizeRequests().antMatchers("/userCreate").access("hasRole('ROLE_USER')");
 
-        // For ADMIN only.
-        http.authorizeRequests().antMatchers("/adminMenu").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/editItem").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/itemList").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/updateItem/{updated}").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/updateSending").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/deleteSending").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/deleteItem").access("hasRole('ROLE_ADMIN')");
-        http.authorizeRequests().antMatchers("/download").access("hasRole('ROLE_ADMIN')");
 
 
         // When the user has logged in as XX.

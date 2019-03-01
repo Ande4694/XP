@@ -16,7 +16,7 @@
 
 <div class="topnav">
     <a href="/">IMDB</a>
-    <a class="/active" href="movie">Movie</a>
+    <a class="active" href="movie">Movie</a>
     <a href="/contact">Contact</a>
     <a href="/aboutUs">About us</a>
     <a href="/actors">Actors</a>
@@ -25,61 +25,41 @@
 <div style="padding-left: 38px;padding-right: 4px;" ;>
     <h2>Movie List</h2>
 
-    <div class="search-container">
-        <form class="example" action="/searchByTitle/" style="max-width:1000px">
-            <input type="text" placeholder="Search.." name="Search">
-            <button type="submit" value="Search"><span>Search by Title</span><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-
-    <div class="search-container">
-        <form class="example" action="/searchByGenre/" style="max-width:1000px">
-            <input type="text" placeholder="Search.." name="Search">
-            <button type="submit"><span>Search by Genre</span><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-    <!--<a href="/searchByGenre/">
-        <button class="button"><span>Search by genre</span></button>
-    </a>-->
 
 
-    <div class="container">
 
+    <div class="main">
 
+        <input type="text" id="myInput" placeholder="Search..." class="searchingBar fontSearch">
         <table id="myTable">
             <thead>
             <tr class="header">
-                <th  style="width:25%;">Movie Id</th>
-                <th style="width:25%;">Title</th>
-                <th style="width:25%;">Genre</th>
-                <th  style="width:25%;">Year</th>
-                <th style="width: 25%;">Options</th>
+
+                <th style="width:25%;" onclick="sortTable(2)">Title</th>
+                <th style="width:25%;" onclick="sortTable(1)">Genre</th>
+                <th style="width:25%;" onclick="sortTableNumber(3)">Duration</th>
+                <th style="width:25%;">Img</th>
+
+
 
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="movie: ${Movies}">
-                <td th:text="${movie.id}"/>
-                <td th:text="${movie.year}"/>
-                <td th:text="${movie.genre}"/>
-                <td th:text="${movie.title}"/>
+            <tbody id="myTable2">
+            <tr th:each="sendings: ${alleVoresFilm}">
 
-                <td>
-                    <div class="dropdown">
-                        <button class="dropbtn">Options</button>
-                        <div class="dropdown-content">
-                            <a th:href="${'select/' + movie.id}">
-                                Select</button>
-                            </a>
-                            <a th:href="${'update/' + movie.id}">
-                                Update</button>
-                            </a>
-                            <a th:href="${'delete/' + movie.id}">
-                                Delete</button>
-                            </a>
-                        </div>
-                    </div>
-                </td>
+                <td th:text="${sendings.title}"/>
+                <td th:text="${sendings.genre}"/>
+                <td th:text="${sendings.duration}"/>
+
+                <!--<td th:img="${sendings.posterLink}"/>-->
+
+
+
+                <td><img th:src="@{${sendings.posterLink}}"/></td>
+
+
+
+
 
             </tr>
 
@@ -93,7 +73,164 @@
 <a href="/create">
     <button class="button"><span>Create movie</span></button>
 </a>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable2 tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    function openModal() {
+        document.getElementById('myModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        captionText.innerHTML = dots[slideIndex-1].alt;
+    }
+
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir = "asc";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /*check if the two rows should switch place,
+                based on the direction, asc or desc:*/
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch= true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount ++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+
+    function sortTableNumber(m) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir2, switchcount2 = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        //Set the sorting direction to ascending:
+        dir2 = "123";
+        /*Make a loop that will continue until
+        no switching has been done:*/
+        while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+                //start by saying there should be no switching:
+                shouldSwitch = false;
+                /*Get the two elements you want to compare,
+                one from current row and one from the next:*/
+                x = rows[i].getElementsByTagName("TD")[m];
+                y = rows[i + 1].getElementsByTagName("TD")[m];
+                //check if the two rows should switch place:
+                if (dir2 == "123") {
+                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir2 == "321"){
+                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+            }
+            if (shouldSwitch) {
+                /*If a switch has been marked, make the switch
+                and mark that a switch has been done:*/
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                //Each time a switch is done, increase this count by 1:
+                switchcount2 ++;
+            } else {
+                /*If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again.*/
+                if (switchcount2 == 0 && dir2 == "123") {
+                    dir2 = "321";
+                    switching = true;
+                }
+            }
+        }
+    }
 </script>
 <div class="logo-TopRight"><img src="https://i.imgur.com/VKkRjuB.png" alt="Trulli" width="150" height="50"></div>
 
