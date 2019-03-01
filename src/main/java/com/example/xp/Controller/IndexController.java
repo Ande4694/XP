@@ -2,6 +2,7 @@ package com.example.xp.Controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class IndexController {
 
     }
 
+
     @GetMapping("/movie")
     public String movie() {
 
@@ -28,7 +30,18 @@ public class IndexController {
 
 
         return "movie";
+    }
+
+        @GetMapping("/login")
+        public String loginPage() {
+
+            return "login";
+        }
+
 
     }
 
-}
+
+
+
+
