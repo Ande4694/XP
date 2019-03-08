@@ -36,7 +36,7 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
         }
 
         if(admin){
-            response.sendRedirect("/");
+            response.sendRedirect("/adminMenu");
         }else{
             response.sendRedirect("/");
         }

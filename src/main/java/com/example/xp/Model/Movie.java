@@ -17,6 +17,9 @@ public class Movie {
         this.posterLink = posterLink;
     }
 
+    public Movie() {
+    }
+
     public int getId() {
         return id;
     }

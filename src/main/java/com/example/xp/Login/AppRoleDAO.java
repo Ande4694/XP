@@ -19,7 +19,7 @@ public class AppRoleDAO {
 
     public List<String> getRoleNames(Long userId) {
         String sql = "Select r.Role_Name " //
-                + " from sns.user_role ur, sns.app_role r " //
+                + " from XPgrp5000.USER_ROLE ur, XPgrp5000.APP_ROLE r " //
                 + " where ur.Role_Id = r.Role_Id and ur.User_Id = ? ";
 
         Object[] params = new Object[] { userId };

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div>
+
+    <form id="form" class="box2" th:action="@{/addMovie}" th:object="${addMovie}" method="Post">
+        <h1>Add a movie</h1>
+
+        <input type="text" th:field="${movie.from}">
+
+        <select type="text" name="genre" class="frontsize-l button" th:field="${movie.genre}">
+            <option value="">Genre</option>
+            <option value="Action">Nansensgade</option>
+            <option value="Adventure">Nansensgade</option>
+            <option value="Animation">Nansensgade</option>
+            <option value="Biography">Nansensgade</option>
+            <option value="Comdey">Nansensgade</option>
+            <option value="Crime">Nansensgade</option>
+            <option value="Documentary">Nansensgade</option>
+            <option value="Drama">Nansensgade</option>
+            <option value="Fantasy">Nansensgade</option>
+            <option value="Film noir">Nansensgade</option>
+            <option value="History">Nansensgade</option>
+            <option value="Horro (thomas)">Nansensgade</option>
+            <option value="Musical">Nansensgade</option>
+            <option value="Mystery">Nansensgade</option>
+            <option value="Romance">Nansensgade</option>
+
+        </select>
+
+
+        <select type="text" name="Item" class="frontsize-l button" th:field="${transfer.item}">
+            <option value="">Select your Item</option>
+            <option value="Laks">Laks</option>
+            <option value="Tuna">Tuna</option>
+            <option value="Sea bass">Sea Bass</option>
+        </select>
+        <input type="number" step="any" name ="Amount" required placeholder="Enter amount" class="frontsize-l button" th:field="${transfer.amount}"/>
+        <input type="text" name ="Name" required placeholder="Enter name" class="frontsize-l" th:field="${transfer.senderName}"/>
+
+        <input onclick="Sure()" type="submit" name ="Submit" value="Submit" class="frontsize-l" id="submit-button"/>
+
+    </form>
+</div>
+
+
+
+</body>
+</html>
