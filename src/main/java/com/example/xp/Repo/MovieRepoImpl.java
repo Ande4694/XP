@@ -2,6 +2,7 @@ package com.example.xp.Repo;
 
 import com.example.xp.Model.Genre;
 import com.example.xp.Model.Movie;
+import com.example.xp.Model.Poster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -50,6 +51,31 @@ public class MovieRepoImpl implements  MovieRepo{
                     allMovies.add(new Movie(id, title, genre, duration, posterLink));
                 }
                 return allMovies;
+            }
+        });
+    }
+
+    @Override
+    public List<Poster> GetLatestMovie() {
+        String sql = "SELECT posterLink " +
+                "        FROM XPgrp5000.Movies" +
+                "        order by idMovies" +
+                "        desc limit 4";
+        return this.template.query(sql, new ResultSetExtractor<List<Poster>>() {
+            @Override
+            public List<Poster> extractData(ResultSet rs) throws SQLException, DataAccessException {
+
+                String posterLink;
+
+                ArrayList<Poster> LatestMovie = new ArrayList<>();
+
+                while (rs.next()) {
+                    posterLink = rs.getString("posterLink");
+
+
+                    LatestMovie.add(new Poster(posterLink));
+                }
+                return LatestMovie;
             }
         });
     }
