@@ -23,11 +23,11 @@ public class IndexController {
     MovieRepo movieRepo;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
 
         log.info("index called");
 
-
+        model.addAttribute("senesteFilm",movieRepo.GetLatestMovie());
 
         return "index";
 
@@ -46,6 +46,7 @@ public class IndexController {
 
     @GetMapping("/login")
     public String loginPage() {
+
 
             return "login";
     }

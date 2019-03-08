@@ -42,18 +42,44 @@
 
 <h2 style="text-align:center">Lightbox</h2>
 
-<div class="row">
-    <div class="column">
-        <img src="http://www.kultunaut.dk/images/film/7096766/plakat.jpg" style="width:66%" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+<!--    <div class="main">
+    <table id="myTable">
+        <thead>
+        <tr class="header">
+
+            <th style="width:25%;" onclick="sortTable(2)">Title</th>
+            <th style="width:25%;" onclick="sortTable(1)">Genre</th>
+            <th style="width:25%;" onclick="sortTableNumber(3)">Duration</th>
+            <th style="width:25%;">Img</th>
+
+
+
+        </tr>
+        </thead>
+    <tbody id="myTable2">
+    <tr th:each="sendings: ${senesteFilm}">
+
+        <td><img th:src="@{${sendings.posterLink}}" style="width:66%" onclick="openModal();currentSlide(1)" class="hover-shadow cursor"></td>
+    </tr>
+
+    </tbody>
+    </table>
+    </div>-->
+
+
+
+<div class="row" th:each="sendings: ${senesteFilm}"    >
+    <div class="column" >
+        <img th:src="@{${sendings.posterLink}}" style="width:66%" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
     </div>
     <div class="column">
-        <img src="https://m.media-amazon.com/images/M/MV5BMTE0YWFmOTMtYTU2ZS00ZTIxLWE3OTEtYTNiYzBkZjViZThiXkEyXkFqcGdeQXVyODMzMzQ4OTI@._V1_.jpg" style="width:66%" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
+        <img th:src="@{${sendings.posterLink}}" style="width:66%" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
     </div>
     <div class="column">
-        <img src="http://www.gstatic.com/tv/thumb/v22vodart/14289030/p14289030_v_v8_aa.jpg" style="width:66%" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
+        <img th:src="@{${sendings.posterLink}}" style="width:66%" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
     </div>
     <div class="column">
-        <img src="http://www.kultunaut.dk/images/film/7098075/plakat.jpg" style="width:66%" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
+        <img th:src="@{${sendings.posterLink}}" style="width:66%" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
     </div>
 </div>
 
