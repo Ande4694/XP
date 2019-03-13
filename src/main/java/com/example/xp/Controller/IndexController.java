@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.logging.Logger;
 
 @Controller
@@ -21,6 +22,8 @@ public class IndexController {
     UserRepo userRepo;
     @Autowired
     MovieRepo movieRepo;
+    @Autowired
+    Showing show;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -40,6 +43,16 @@ public class IndexController {
         log.info("movie called");
 
         model.addAttribute("alleVoresFilm",movieRepo.getAllMovies());
+
+        Movie mov = movieRepo.getAllMovies().get(2);
+
+
+        //VÆLG HVILKEN FILM
+        // VÆLG HVORNÅR
+        show = new Showing(mov, LocalDate.now());
+
+
+        show.book("Jonathan", true, 4);
 
         return "movie";
     }

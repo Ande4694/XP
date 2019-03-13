@@ -5,19 +5,31 @@ public class Movie {
 
     private int id;
     private String title;
-    private String genre;
+
     private int duration;
     private String posterLink;
 
-    public Movie(int id, String title, String genre, int duration, String posterLink) {
-        this.id = id;
+    public Movie( String title, int duration, String posterLink) {
+      //  this.id = id;
         this.title = title;
-        this.genre = genre;
+
+        this.duration = duration;
+        this.posterLink = posterLink;
+    }
+
+    public Movie(int id, String title, int duration, String posterLink) {
+          this.id = id;
+        this.title = title;
+
         this.duration = duration;
         this.posterLink = posterLink;
     }
 
     public Movie() {
+    }
+
+    public Movie(String title) {
+        this.title = title;
     }
 
     public int getId() {
@@ -30,14 +42,6 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public int getDuration() {

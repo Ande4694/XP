@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,19 +23,17 @@ public class MovieRepoImpl implements  MovieRepo{
     @Autowired
     JdbcTemplate template;
 
+
     @Override
     public List<Movie> getAllMovies() {
-        String sql = "SELECT Movies.idMovies, Movies.title, genre.movieGenre, Movies.duration, Movies.posterLink" +
-                "        from XPgrp5000.Movies" +
-                "        inner join genre" +
-                "        on Movies.genre = genre.idgenre";
+        String sql = "SELECT *" +
+                "        from XPgrp5000.Movies" ;
         return this.template.query(sql, new ResultSetExtractor<List<Movie>>() {
             @Override
             public List<Movie> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
                 int id;
                 String title;
-                String genre;
                 int duration;
                 String posterLink;
 
@@ -43,17 +42,18 @@ public class MovieRepoImpl implements  MovieRepo{
                 while (rs.next()) {
                     id = rs.getInt("idMovies");
                     title = rs.getString("title");
-                    genre = rs.getString("movieGenre");
                     duration = rs.getInt("duration");
-                    posterLink = rs.getString("posterLink");
+                    posterLink = rs.getString("posterL,ink");
 
 
-                    allMovies.add(new Movie(id, title, genre, duration, posterLink));
+                    allMovies.add(new Movie(id ,title, duration, posterLink));
                 }
                 return allMovies;
             }
         });
     }
+
+
 
     @Override
     public List<Poster> GetLatestMovie() {
@@ -89,23 +89,29 @@ public class MovieRepoImpl implements  MovieRepo{
         String title = movie.getTitle();
         int duration = movie.getDuration();
         String posterLink = movie.getPosterLink();
-        int genre = getGenreInt(movie.getGenre());
 
-        this.template.update(sql, title, genre, duration, posterLink);
+
+        this.template.update(sql, title, duration, posterLink);
 
     }
 
-    private int getGenreInt(String genre) {
-        String sql = "select idgenre from "+
-                "XPgrp5000.genre "+
-                "where movieGenre =?";
 
-        RowMapper<Genre> rm = new BeanPropertyRowMapper<>(Genre.class);
 
-        List<Genre> searched = template.query(sql, rm, genre);
+    @Override
+    ////MÅSKE FEJL
+    public int getMovieId(String movieName){
+        String sql = "select idMovies from "+
+                "XPgrp5000.Movies "+
+                "where title =?";
+
+        RowMapper<Movie> rm = new BeanPropertyRowMapper<>(Movie.class);
+
+        List<Movie> searched = template.query(sql, rm, movieName);
 
         return searched.get(0).getId();
-    }
+     }
+
+
 
     @Override
     public void deleteMovie(int id) {
@@ -120,6 +126,6 @@ public class MovieRepoImpl implements  MovieRepo{
 
         String sql = "insert into XPgrp5000.Movies values (default, ?, ?, ?, ?)";
 
-        this.template.update(sql, movie.getTitle(), getGenreInt(movie.getGenre()), movie.getDuration(), movie.getPosterLink());
+        this.template.update(sql, movie.getTitle(),  movie.getDuration(), movie.getPosterLink());
     }
 }
