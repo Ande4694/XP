@@ -73,10 +73,9 @@
 <div th:each="sendings: ${senesteFilm}">
     <div class="responsive">
         <div class="gallery">
-            <a target="_blank" href="img_5terre.jpg">
+            <a target="_blank" th:href="@{localhost:5000/ + ${sendings.posterLink}}">
                 <img th:src="@{${sendings.posterLink}}" alt="Cinque Terre" width="600" height="400">
             </a>
-            <div class="desc">Add a description of the image here</div>
         </div>
     </div>
 
@@ -136,6 +135,58 @@
     </div>
 </div>
 </div>
+
+
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
+<div id="id01" class="modal">
+
+    <form class="modal-content animate" action="/action_page.php">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+
+            <form action="/action_page.php">
+                <div class="container">
+                    <h1>Book Seats</h1>
+                    <p>Please fill in this form to Book seats</p>
+                    <hr>
+
+                    <label for="email"><b>Film</b></label>
+                    <p> <select required>
+                        <option th:each="sendings: ${titleFilm}" th:text="@{${sendings.title}}">
+
+                        </option>
+                    </select></p>
+
+                    <label for="psw-repeat"><b>Date</b></label>
+                    <p><input type="date" placeholder="Repeat Password" name="psw-repeat" required></p>
+
+                    <label for="psw"><b>Name</b></label>
+                    <input type="text" placeholder="Enter your name" name="psw-repeat" required>
+
+
+
+
+
+
+
+
+                    <label for="psw-repeat"><b>Seats</b></label>
+                    <p><input type="number" placeholder="Number of Seats" name="psw-repeat" required></p>
+
+                    <hr>
+                    <p>By Booking Seats at XPkino you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+                    <button type="submit" class="registerbtn">Pay Now</button>
+                </div>
+
+                <div class="container signin">
+                    <p>Got cold feet? <a href="/">Get out!</a>.</p>
+                </div>
+            </form>
+        </div>
+    </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
@@ -292,6 +343,15 @@
                     switching = true;
                 }
             }
+        }
+    }
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
         }
     }
 </script>

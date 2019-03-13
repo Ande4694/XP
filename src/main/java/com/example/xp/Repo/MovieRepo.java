@@ -11,6 +11,7 @@ public interface MovieRepo {
 
     List<Poster> GetLatestMovie();
 
+
     void updateMovie(Movie movie, int id);
     void deleteMovie(int id);
     void createMovie(Movie movie);
