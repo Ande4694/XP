@@ -57,6 +57,16 @@ public class IndexController {
         return "movie";
     }
 
+    @GetMapping("/Book")
+    public String Book(Model model) {
+
+        log.info("Book called");
+
+        model.addAttribute("titleFilm",movieRepo.getAllMovies());
+
+        return "Book";
+    }
+
     @GetMapping("/login")
     public String loginPage() {
 
