@@ -3,6 +3,7 @@ package com.example.xp.Repo;
 import com.example.xp.Model.Genre;
 import com.example.xp.Model.Movie;
 import com.example.xp.Model.Poster;
+import com.example.xp.Model.Showing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -55,6 +56,7 @@ public class MovieRepoImpl implements  MovieRepo{
 
 
 
+
     @Override
     public List<Poster> GetLatestMovie() {
         String sql = "SELECT posterLink " +
@@ -96,6 +98,13 @@ public class MovieRepoImpl implements  MovieRepo{
 
     }
 
+    @Override
+    public void addBooking(String name, Boolean pay, LocalDate playTime, String movieName){
+        String sql = "insert into booking Values (default, ?, ?, ?, ?); ";
+
+        this.template.update(sql, name, pay, playTime, movieName);
+
+    }
 
 
     @Override

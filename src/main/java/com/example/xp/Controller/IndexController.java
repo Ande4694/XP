@@ -2,6 +2,7 @@ package com.example.xp.Controller;
 
 
 import com.example.xp.Model.Movie;
+import com.example.xp.Model.Showing;
 import com.example.xp.Repo.MovieRepo;
 import com.example.xp.Repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class IndexController {
         log.info("index called");
 
         model.addAttribute("senesteFilm",movieRepo.GetLatestMovie());
+        movieRepo.addBooking("Anders", true,  LocalDate.now(), "Thomas er en slyngel");
+
 
         return "index";
 

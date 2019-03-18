@@ -78,8 +78,9 @@ public class Showing {
                 for (int i = 0; i < people; i++) {
 
                     pladser[count] = new Booking(pay, name);
-                    status = "Booking made:\nname: "+name+"\npay: "+pay+"\nnumber of people: "+people+"\nPlaying date: " + playingDateTime;
+                    status = "Booking made:\nname: "+name+"\npay: "+pay+"\nnumber of people: "+people+"\nPlaying date: " + playingDateTime+"\nMovie: "+movie.getTitle();
                     count++;
+
                 }
 
 
