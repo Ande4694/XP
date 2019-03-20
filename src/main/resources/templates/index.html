@@ -137,7 +137,7 @@
 </div>
 
 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Book</button>
 
 <div id="id01" class="modal">
 
@@ -149,31 +149,11 @@
             <form action="/action_page.php">
                 <div class="container">
                     <h1>Book Seats</h1>
-                    <p>Please fill in this form to Book seats</p>
+                    <p>How many seats?</p>
                     <hr>
 
-                    <label for="email"><b>Film</b></label>
-                    <p> <select required>
-                        <option th:each="sendings: ${titleFilm}" th:text="@{${sendings.title}}">
-
-                        </option>
-                    </select></p>
-
-                    <label for="psw-repeat"><b>Date</b></label>
-                    <p><input type="date" placeholder="Repeat Password" name="psw-repeat" required></p>
-
-                    <label for="psw"><b>Name</b></label>
-                    <input type="text" placeholder="Enter your name" name="psw-repeat" required>
-
-
-
-
-
-
-
-
                     <label for="psw-repeat"><b>Seats</b></label>
-                    <p><input type="number" placeholder="Number of Seats" name="psw-repeat" required></p>
+                   <p><input type="number" placeholder="" name="psw-repeat" required></p>
 
                     <hr>
                     <p>By Booking Seats at XPkino you agree to our <a href="#">Terms & Privacy</a>.</p>
@@ -187,8 +167,66 @@
             </form>
         </div>
     </form>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+
+    $(function(){
+
+        $('#btnSeating').on('click', createseating);
+
+
+    });
+    //Note:In js the outer loop runs first then the inner loop runs completely so it goes o.l. then i.l. i.l .i.l .i.l. i.l etc and repeat
+
+    function createseating(){
+
+        var seatingValue = [];
+        for ( var i = 0; i < 10; i++){
+
+            for (var j=0; j<5; j++){
+                var seatingStyle = "<div class='seat available'></div>";
+                seatingValue.push(seatingStyle);
+
+                if ( j === 9){
+                    console.log("hi");
+                    var seatingStyle = "<div class='clearfix'></div>";
+                    seatingValue.push(seatingStyle);
+
+
+
+                }
+            }
+        }
+
+        $('#messagePanel').html(seatingValue);
+
+        $(function(){
+            $('.seat').on('click',function(){
+
+
+                if($(this).hasClass( "selected" )){
+                    $( this ).removeClass( "selected" );
+                }else{
+                    $( this ).addClass( "selected" );
+                }
+
+            });
+
+            $('.seat').mouseenter(function(){
+                $( this ).addClass( "hovering" );
+
+                $('.seat').mouseleave(function(){
+                    $( this ).removeClass( "hovering" );
+
+                });
+            });
+
+
+        });
+
+    };
+
 
     $(document).ready(function(){
         $("#myInput").on("keyup", function() {

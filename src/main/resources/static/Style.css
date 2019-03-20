@@ -887,3 +887,31 @@ a {
     background-color: #f1f1f1;
     text-align: center;
 }
+
+
+
+
+.messagePanel { border: solid 1px black; width: 302px; height: 152px; }
+
+.seat {
+
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    border: solid 1px black;
+    float: left;
+
+
+}
+
+.clearfix { clear: both;}
+.available {
+    background-color: #96c131;
+}
+
+.hovering{
+    background-color: #ae59b3;
+}
+.selected{
+    background-color: red;
+}
