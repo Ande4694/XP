@@ -33,9 +33,9 @@ public class IndexController {
 
         model.addAttribute("senesteFilm",movieRepo.GetLatestMovie());
 
-        for (int i = 0; i < 4 ; i++) {
-            movieRepo.addBooking("Testy", false);
-        }
+       // for (int i = 0; i < 4 ; i++) {
+         //   movieRepo.addBooking("Testy", false);
+        //}
 
 
         return "index";
