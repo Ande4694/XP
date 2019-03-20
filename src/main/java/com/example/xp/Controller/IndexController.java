@@ -2,6 +2,7 @@ package com.example.xp.Controller;
 
 
 import com.example.xp.Model.Movie;
+import com.example.xp.Model.Order;
 import com.example.xp.Model.Showing;
 import com.example.xp.Repo.MovieRepo;
 import com.example.xp.Repo.UserRepo;
@@ -66,13 +67,25 @@ public class IndexController {
     }
 
     @GetMapping("/Book")
-    public String Book(Model model) {
+    public String Book(Model model, Model modelBook) {
 
         log.info("Book called");
 
         model.addAttribute("titleFilm",movieRepo.getAllMovies());
+        modelBook.addAttribute("booking", new Order());
 
         return "Book";
+    }
+
+    @PostMapping ("/Book")
+    public String Book(@ModelAttribute Order order) {
+
+        for (int i = 0; i < order.getSeats(); i++) {
+            movieRepo.addBooking(order.getBuyerName(), order.isPay(), order.getMovieName());
+        }
+
+
+        return "redirect:index";
     }
 
     @GetMapping("/login")

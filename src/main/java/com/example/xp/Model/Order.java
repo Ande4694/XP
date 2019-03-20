@@ -4,7 +4,7 @@ public class Order {
 
     private String movieName;
     private String buyerName;
-    private boolean pay;
+    private boolean pay = false;
     private int seats;
 
     public String getMovieName() {
@@ -44,5 +44,8 @@ public class Order {
         this.buyerName = buyerName;
         this.pay = pay;
         this.seats = seats;
+    }
+
+    public Order() {
     }
 }
