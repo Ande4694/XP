@@ -85,7 +85,7 @@ public class IndexController {
         }
 
 
-        return "redirect:index";
+        return "redirect:/";
     }
 
     @GetMapping("/login")

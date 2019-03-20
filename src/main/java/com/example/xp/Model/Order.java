@@ -4,7 +4,7 @@ public class Order {
 
     private String movieName;
     private String buyerName;
-    private boolean pay = false;
+    private boolean pay;
     private int seats;
 
     public String getMovieName() {
