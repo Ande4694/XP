@@ -44,7 +44,7 @@ public class MovieRepoImpl implements  MovieRepo{
                     id = rs.getInt("idMovies");
                     title = rs.getString("title");
                     duration = rs.getInt("duration");
-                    posterLink = rs.getString("posterL,ink");
+                    posterLink = rs.getString("posterLink");
 
 
                     allMovies.add(new Movie(id ,title, duration, posterLink));
