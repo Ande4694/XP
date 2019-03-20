@@ -23,7 +23,7 @@ public interface MovieRepo {
     void deleteMovie(int id);
     void createMovie(Movie movie);
     int getMovieId(String movieName);
-    void addBooking(String name, Boolean pay);
+    void addBooking(String name, Boolean pay, String movieName);
 
 
 }

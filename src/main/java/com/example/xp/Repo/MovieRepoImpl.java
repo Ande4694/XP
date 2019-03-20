@@ -99,10 +99,10 @@ public class MovieRepoImpl implements  MovieRepo{
     }
 
     @Override
-    public void addBooking(String name, Boolean pay){
-        String sql = "insert into booking Values (default, ?, ?); ";
+    public void addBooking(String name, Boolean pay, String movieName){
+        String sql = "insert into booking Values (default, ?, ?, ?); ";
 
-        this.template.update(sql, name, pay);
+        this.template.update(sql, name, pay, movieName);
 
     }
 
