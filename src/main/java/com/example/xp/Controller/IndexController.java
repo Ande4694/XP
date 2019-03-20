@@ -32,12 +32,17 @@ public class IndexController {
         log.info("index called");
 
         model.addAttribute("senesteFilm",movieRepo.GetLatestMovie());
-        movieRepo.addBooking("Anders", true,  LocalDate.now(), "Thomas er en slyngel");
+
+        for (int i = 0; i < 4 ; i++) {
+            movieRepo.addBooking("Testy", false);
+        }
 
 
         return "index";
 
     }
+
+
 
 
     @GetMapping("/movie")
